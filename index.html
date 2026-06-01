@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="img/552448.png" alt="logo météo" id="logoMeteo">
+        </a>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html" class="nav">Accueil</a></li>
+                <li><a href="contact.html" class="nav">Contact</a></li>
+                <li><a href="aide.html" class="nav">Aide</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main id="app">
+        <div class="container-fluid" id="sectionMeteo">
+            <h1>Bienvenue sur Météo</h1>
+            <p>Ici, vous allez pouvoir consulter les prévisions météorologiques pour votre région.<br>
+                Pour commencer, entrez le nom de votre ville dans la barre de recherche ci-dessus et cliquez sur "Rechercher".
+            </p>
+            <input type="text" v-model="inputVille" @keypress.enter="getMeteo" placeholder="Entrez le nom de votre ville">
+            <button @click="getMeteo">Valider</button>
+        </div>
+        <div>
+            <h2>La météo d'aujourd'hui :</h2>
+            <div id="localWeatherBanner" class="local-banner" v-if="localWeather">
+                <h3>Météo actuelle à Vannes</h3>
+                <div class="local-info">
+                    <span>{{ Math.round(localWeather.main.temp) }}°C</span>
+                    <span>{{ localWeather.weather[0].description }}</span>
+                    <img :src="'https://openweathermap.org/img/wn/' + localWeather.weather[0].icon + '@2x.png'" alt="Météo" style="vertical-align: middle; width: 50px;">
+                </div>
+            </div>
+            <div v-else>Chargement de la météo locale...</div>
+        </div>
+        <div>
+            <h2>Prévisions Météo</h2>
+            <p v-if="errorMsg" class="error" style="color: red;">{{ errorMsg }}</p>
+
+            <details id="resultatMeteo" v-if="weather" open>
+                <summary>
+                    <h2 style="display:inline;">{{ weather.name }}, {{ weather.sys.country }}</h2>
+                </summary>
+
+                <div class="content">
+                    <img :src="'https://openweathermap.org/img/wn/' + weather.weather[0].icon + '@2x.png'" alt="Icone météo">
+                    <h3>{{ Math.round(weather.main.temp) }} °C</h3>
+                    <p>{{ weather.weather[0].description }}</p>
+
+                    <button @click="toggleDetails" class="btn btn-sm btn-light">
+                        {{ showAdvanced ? 'Cacher les détails' : 'Détails avancés' }}
+                    </button>
+                    <div v-show="showAdvanced" style="margin-top:15px; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 10px;">
+                        <p>Humidité : <span>{{ weather.main.humidity }}</span>% | Vent : <span>{{ getWindSpeed(weather.wind.speed) }}</span> km/h</p>
+                        <p>Min : <span>{{ Math.round(weather.main.temp_min) }}</span>°C | Max : <span>{{ Math.round(weather.main.temp_max) }}</span>°C | Pression : <span>{{ weather.main.pressure }}</span> hPa</p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="container mt-5">
+            <h2>Prévisions sur 5 jours</h2>
+            <div id="forecastContainer" class="row g-2 justify-content-center">
+                <div class="col-6 col-md-2" v-for="day in forecast" :key="day.dt">
+                    <div class="card text-center h-100 shadow-sm" style="background-color: rgba(15, 108, 120, 0.8); color: white; border: 1px solid #45868f;">
+                        <div class="card-body p-2">
+                            <p class="mb-0 fw-bold text-capitalize">{{ formatDate(day.dt) }}</p>
+                            <img :src="'https://openweathermap.org/img/wn/' + day.weather[0].icon + '.png'" alt="icon">
+                            <p class="h5 mb-0">{{ Math.round(day.main.temp) }}°C</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="navFoot">Accueil</a></li>
+                <li><a href="contact.html" class="navFoot">Contact</a></li>
+                <li><a href="aide.html" class="navFoot">Aide</a></li>
+            </ul>
+        </nav>
+        <p>&copy; 2024 Météo. Tous droits réservés.</p>
+    </footer>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+</html>

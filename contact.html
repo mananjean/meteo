@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Contact - Météo</title>
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="img/552448.png" alt="logo" id="logoMeteo"></a>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="nav">Accueil</a></li>
+                <li><a href="contact.html" class="nav">Contact</a></li>
+                <li><a href="aide.html" class="nav">Aide</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container my-5" id="app">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow border-0" style="background-color: rgba(15, 108, 120, 0.9); color: white; border-radius: 20px;">
+                    <div class="card-body p-5">
+                        <h1 class="text-center mb-4">Contactez-nous</h1>
+                        
+                        <form @submit.prevent="envoyerMessage" v-if="!formSubmitted">
+                            <div class="mb-3">
+                                <label class="form-label">Nom complet</label>
+                                <input type="text" class="form-control rounded-pill" v-model="formData.nom" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control rounded-pill" v-model="formData.email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Message</label>
+                                <textarea class="form-control" rows="4" style="border-radius: 15px;" v-model="formData.message" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn px-5 fw-bold" style="background-color: #d2eff0; color: #0e4f58; border-radius: 45px;">Envoyer</button>
+                            </div>
+                        </form>
+                        
+                        <div v-else class="mt-3 text-center" style="color: #d2eff0; font-size: 1.2em;">
+                            Merci <strong>{{ formData.nom }}</strong> ! Votre message a été envoyé avec succès.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="navFoot">Accueil</a></li>
+                <li><a href="contact.html" class="navFoot">Contact</a></li>
+                <li><a href="aide.html" class="navFoot">Aide</a></li>
+            </ul>
+        </nav>
+        <p>&copy; 2024 Météo. Tous droits réservés.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    formData: {
+                        nom: '',
+                        email: '',
+                        message: ''
+                    },
+                    formSubmitted: false // Contrôle l'affichage
+                };
+            },
+            methods: {
+                envoyerMessage() {
+                    // Ici on pourrait envoyer les données à un serveur avec fetch()
+                    // Pour le TP, on se contente d'afficher le message de succès
+                    this.formSubmitted = true;
+                }
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+</html>

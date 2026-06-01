@@ -1,0 +1,205 @@
+body{
+    font-family: Arial, sans-serif;
+    background-color: #0e4f58;
+    color: #d2eff0;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+header{
+    display: flex;
+    padding: 40px 20px;
+    justify-content: space-between;
+
+}
+#logoMeteo{
+    width: 100px;
+    height: auto;
+    margin-left: 20px;
+}
+footer{
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #0c4850;
+    color: #d2eff0;
+}
+nav{
+    text-align: center;
+}
+ul{
+    list-style: none;
+}
+li{
+    display: inline-block;
+    margin-right: 1px;
+}
+.nav{
+    color: #d2eff0;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #45868f;
+    border-radius: 15px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.nav:hover{
+    /* 3. L'ombre d'arrivée (plus large et plus diffus) */
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  /* BONUS : On remonte légèrement la div pour simuler la levée */
+  transform: translateY(-2px);
+    /* Changement de couleur de fond */
+  background-color: #6d9da8;
+}
+
+.navFoot{
+    color: #d2eff0;
+    text-decoration: none;
+    font-size: 1em;
+    margin: 0 15px;
+    transition: transform 0.3s ease, text-shadow 0.3s ease
+}
+.navFoot:hover{
+    /* 3. L'ombre d'arrivée (plus large et plus diffus) */
+  text-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
+  /* BONUS : On remonte légèrement la div pour simuler la levée */
+  transform: translateY(-2px);
+}
+h1{
+    font-size: 5em;
+    margin-bottom: 20px;
+}
+h2{
+    font-size: 2em;
+    margin-top: 20px;
+}
+
+button{
+    background-color: #d2eff0;
+    color: #0e4f58;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 45px;
+}
+
+#sectionMeteo {
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)),
+    url('img/sky.jpg');
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+    align-items: center;
+  background-position: center;
+  padding: 70px;
+  
+}
+
+#sectionMeteo > * {
+    margin: 10px 0;
+}
+
+#sectionMeteo > button {
+    align-self: center;
+}
+
+input[type="text"] {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 45px;
+    margin-right: 10px;
+    width: 300px;
+}
+.hidden {
+    display: none;
+}
+#resultatMeteo {
+    margin-top: 20px;
+    font-size: 1.5em;
+    align-self: flex-start;
+}
+
+details {
+    background-color: rgba(15, 108, 120, 0.9); /* Fond légèrement transparent */
+    color: #ffffff;
+    border-radius: 15px;
+    padding: 30px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: start;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+summary {
+    font-weight: bold;
+    padding: 10px;
+    outline: none; /* Enlève le contour bleu au clic */
+}
+details[open] {
+    background-color: rgba(19, 124, 138, 0.9);; /* Devient totalement blanc quand ouvert */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.content {
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    animation: fadeIn 0.5s; /* Petit effet d'apparition */
+}
+
+/* Animation simple */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.local-banner {
+    background-color: rgba(15, 108, 120, 0.9);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between; /* Titre à gauche, météo à droite */
+    align-items: center;
+    box-shadow: 0 0px 20px rgba(0,0,0,0.2);
+}
+
+.local-info {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.local-info > * {
+    margin: 0 10px;
+}
+
+/* MODIFICATION : Ajustement pour les prévisions sur 5 jours sans casser le design */
+#forecastContainer .card {
+    background-color: rgba(12, 72, 80, 0.8) !important; /* Adapté à vos couleurs */
+    border: 1px solid #45868f !important;
+    transition: transform 0.2s;
+}
+
+#forecastContainer .card:hover {
+    transform: scale(1.05);
+}
+
+/* AJOUT : Style pour le bouton détails avancés */
+#btnDetails {
+    margin-top: 10px;
+    border-radius: 20px;
+    background-color: #d2eff0;
+    color: #0e4f58;
+}
